@@ -40,6 +40,12 @@ class Html_gen::Element
   #  element.html #=> "<b>Te<i>s</i>t</b>"
   attr_accessor :str_html
   
+  #An array holding all the sub-elements of this element.
+  attr_accessor :eles
+  
+  #The name of the element. "a" for <a> and such.
+  attr_accessor :name
+  
   #You can give various arguments as shortcuts to calling the methods. You can also decide what should be used for newline and indentation.
   #  Html_gen::Element.new(:b, {
   #    :css => {"font-weight" => "bold"},
@@ -176,5 +182,15 @@ class Html_gen::Element
     
     #Returns the string.
     return str
+  end
+  
+  #Returns the names of all sub-elements in an array.
+  def eles_names
+    names = []
+    @eles.each do |ele|
+      names << ele.name
+    end
+    
+    return names
   end
 end
