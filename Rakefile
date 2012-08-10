@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "html_gen"
   gem.homepage = "http://github.com/kaspernj/html_gen"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A small framework for generating HTML.}
+  gem.description = %Q{A small framework for generating HTML.}
   gem.email = "k@spernj.org"
   gem.authors = ["Kasper Johansen"]
   # dependencies defined in Gemfile
