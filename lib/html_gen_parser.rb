@@ -1,6 +1,13 @@
+#A simple, lightweight and pure-Ruby class for parsing HTML-strings into elements.
+#===Examples
+#  doc = Html_gen::Parser.new(:str => a_html_variable)
+#  html_ele = doc.eles.first
+#  html_ele.name #=> "html"
 class Html_gen::Parser
+  #An array that holds all the parsed root-elements.
   attr_reader :eles
   
+  #The constructor. See class documentation for usage of this.
   def initialize(args)
     if args[:io]
       @io = args[:io]
@@ -24,6 +31,7 @@ class Html_gen::Parser
   
   private
   
+  #Ensures at least 16kb of data is loaded into the buffer.
   def ensure_buffer
     while @buffer.length < 16384 and !@eof
       str = @io.gets(16384)
@@ -35,19 +43,21 @@ class Html_gen::Parser
     end
   end
   
+  #Searches for a given regex. If found the contents is removed from the buffer.
   def search(regex)
+    ensure_buffer
+    
     if match = @buffer.match(regex)
       @buffer.gsub!(regex, "")
-      
+      ensure_buffer
       return match
     end
     
     return false
   end
   
+  #Asumes a tag is the next to be parsed and adds it to document-data.
   def parse_tag(args = {})
-    ensure_buffer
-    
     if match = search(/\A\s*<\s*(\/|)\s*(\S+?)(\s+|\/\s*>|>)/)
       tag_name = match[2].to_s.strip.downcase
       start_sign = match[1].to_s.strip.downcase
@@ -86,8 +96,8 @@ class Html_gen::Parser
     end
   end
   
+  #Assumes some content of a tag is next to be parsed and parses it.
   def parse_content_of_tag(ele, tag_name)
-    ensure_buffer
     raise "Empty tag-name given: '#{tag_name}'." if tag_name.to_s.strip.empty?
     raise "No 'ele' was given." if !ele
     
