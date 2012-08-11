@@ -100,6 +100,7 @@ class Html_gen::Parser
     end
   end
   
+  #Parses all attributes of the current tag.
   def parse_attr_of_tag(ele, tag_name)
     loop do
       if match = search(/\A\s*(\S+)=(\"|'|)/)
@@ -127,6 +128,7 @@ class Html_gen::Parser
     end
   end
   
+  #Parses an attribute-value until a given quote-char is reached.
   def parse_attr_until_quote(quote_char, quote_val)
     val = ""
     
