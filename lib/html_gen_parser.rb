@@ -83,6 +83,10 @@ class Html_gen::Parser
         ele = @eles_t.pop
         raise "Expected ele-name to be: '#{tag_name}' but it wasnt: '#{ele.name}'." if ele.name.to_s != tag_name
         return ele
+      elsif end_sign.to_s.strip.empty?
+        parse_attr_of_tag(ele, tag_name)
+        ele.convert_style_to_css if ele.attr.key?("style") or ele.attr.key?(:style)
+        return ele
       else
         parse_content_of_tag(ele, tag_name)
         return ele
@@ -94,6 +98,57 @@ class Html_gen::Parser
         raise "Dont know what to do with buffer: '#{@buffer}'."
       end
     end
+  end
+  
+  def parse_attr_of_tag(ele, tag_name)
+    loop do
+      if match = search(/\A\s*(\S+)=(\"|'|)/)
+        attr_name = match[1]
+        raise "Attribute already exists on element: '#{attr_name}'." if ele.attr.key?(attr_name)
+        
+        if match[2].to_s.empty?
+          quote_char = /\s+/
+          quote_val = :whitespace
+        else
+          quote_char = /#{Regexp.escape(match[2])}/
+          quote_val = :normal
+        end
+        
+        attr_val = parse_attr_until_quote(quote_char, quote_val)
+        
+        puts "Parsed attribute '#{attr_name}' with value '#{attr_val}'." if @debug
+        ele.attr[attr_name] = attr_val
+      elsif search(/\A\s*>/)
+        parse_content_of_tag(ele, tag_name)
+        break
+      else
+        raise "Dont know what to do with buffer when parsing attributes: '#{@buffer}'."
+      end
+    end
+  end
+  
+  def parse_attr_until_quote(quote_char, quote_val)
+    val = ""
+    
+    loop do
+      ensure_buffer
+      char = @buffer.slice!(0)
+      break if !char
+      
+      if char == "\\"
+        val << char
+        val << @buffer.slice!(0)
+      elsif char =~ quote_char
+        break
+      elsif char == ">" and quote_val == :whitespace
+        @buffer = char + @buffer
+        break
+      else
+        val << char
+      end
+    end
+    
+    return val
   end
   
   #Assumes some content of a tag is next to be parsed and parses it.

@@ -193,4 +193,29 @@ class Html_gen::Element
     
     return names
   end
+  
+  #Converts the content of the 'style'-attribute to css-hash-content.
+  def convert_style_to_css
+    if !@attr[:style].to_s.strip.empty?
+      style = @attr[:style]
+    elsif !@attr["style"].to_s.strip.empty?
+      style = @attr["style"]
+    else
+      raise "No style set in element."
+    end
+    
+    loop do
+      if match = style.match(/\A\s*(\S+?):\s*(.+?)\s*(;|\Z)/)
+        style.gsub!(match[0], "")
+        key = match[1]
+        val = match[2]
+        raise "Such a key already exists in CSS-hash: '#{key}'." if @css.key?(key)
+        @css[key] = val
+      elsif match = style.slice!(/\A\s*\Z/)
+        break
+      else
+        raise "Dont know what to do with style-variable: '#{style}'."
+      end
+    end
+  end
 end
