@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{html_gen}
-  s.version = "0.0.1"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kasper Johansen"]
-  s.date = %q{2012-08-10}
+  s.date = %q{2012-08-11}
   s.description = %q{A small framework for generating HTML.}
   s.email = %q{k@spernj.org}
   s.extra_rdoc_files = [
@@ -28,6 +28,9 @@ Gem::Specification.new do |s|
     "html_gen.gemspec",
     "lib/html_gen.rb",
     "lib/html_gen_element.rb",
+    "lib/html_gen_parser.rb",
+    "lib/html_gen_text_ele.rb",
+    "spec/html_gen_parser_spec.rb",
     "spec/html_gen_spec.rb",
     "spec/spec_helper.rb"
   ]
