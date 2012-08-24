@@ -23,5 +23,12 @@ describe "HtmlGen" do
     
     html = Html_gen::Element.new(:b, :str_html => "<b>Test</b>").html(:pretty => false)
     raise "Expected escape HTML: '#{html}'." if html != "<b><b>Test</b></b>"
+    
+    div_ele = Html_gen::Element.new(:div)
+    div_ele.add_ele(:br)
+    div_ele.add_str("This is a test")
+    
+    html = div_ele.html(:pretty => false)
+    raise "Expected HTML: '#{html}'." if html != "<div><br />This is a test</div>"
   end
 end

@@ -81,7 +81,14 @@ class Html_gen::Element
   #  another_ele.str = "Hello world!"
   #  element.html #=> "<a>\n\t<b>\n\t\tHello world!\n\t</b>\n</a>\n"
   def add_ele(name, args = {})
-    ele = Html_gen::Element.new(name, args)
+    ele = Html_gen::Element.new(name, args.merge(:nl => @nl, :inden => @inden))
+    @eles << ele
+    return ele
+  end
+  
+  #Add a text-element to the element.
+  def add_str(str)
+    ele = Html_gen::Text_ele.new(:str => str, :inden => @inden, :nl => @nl)
     @eles << ele
     return ele
   end
@@ -103,7 +110,7 @@ class Html_gen::Element
     end
     
     #Used for keeping 'pretty'-value and correct indentation according to parent elements.
-    pass_args = {:level => (level + 1), :pretty => pretty}
+    pass_args = {:level => (level + 1), :pretty => pretty, :inden => @inden}
     
     #Clone the attributes-hash since we are going to add stuff to it, and it shouldnt be reflected (if 'html' is called multiple times, it will bug unless we clone).
     attr = @attr.clone
