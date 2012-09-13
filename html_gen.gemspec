@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{html_gen}
-  s.version = "0.0.4"
+  s.name = "html_gen"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kasper Johansen"]
-  s.date = %q{2012-08-24}
-  s.description = %q{A small framework for generating HTML.}
-  s.email = %q{k@spernj.org}
+  s.date = "2012-09-13"
+  s.description = "A small framework for generating HTML."
+  s.email = "k@spernj.org"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -34,11 +34,11 @@ Gem::Specification.new do |s|
     "spec/html_gen_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/kaspernj/html_gen}
+  s.homepage = "http://github.com/kaspernj/html_gen"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{A small framework for generating HTML.}
+  s.rubygems_version = "1.8.24"
+  s.summary = "A small framework for generating HTML."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
