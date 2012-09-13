@@ -27,7 +27,7 @@ class Html_gen::Text_ele
     end
     
     str = ""
-    str << @inden * (level + 1) if pretty
+    str << @inden * level if pretty
     str << Html_gen.escape_html(@str)
     str << @nl if pretty
     

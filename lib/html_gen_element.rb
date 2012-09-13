@@ -10,6 +10,8 @@
 #  
 #  ele.html #=> "<a href=\"http://www.youtube.com\" style=\"font-weight: bold;\" class=\"custom_link\">\n\t<b>\n\t\tTitle of link\n\t</b>\n</a>\n"
 class Html_gen::Element
+  FORBIDDEN_SHORT = ["script"]
+  
   #Attributes hash which will be used to generate attributes-elements.
   #===Example
   #  element.attr[:href] = "http://www.youtube.com"
@@ -86,6 +88,8 @@ class Html_gen::Element
     return ele
   end
   
+  alias add add_ele
+  
   #Add a text-element to the element.
   def add_str(str)
     ele = Html_gen::Text_ele.new(:str => str, :inden => @inden, :nl => @nl)
@@ -157,14 +161,22 @@ class Html_gen::Element
       str << " #{key}=\"#{Html_gen.escape_html(val)}\""
     end
     
-    if @eles.empty? and @str.empty? and @str_html.empty?
+    forbidden_short = FORBIDDEN_SHORT.include?(@name.to_s)
+    skip_pretty = false
+    
+    if @eles.empty? and @str.empty? and @str_html.empty? and !forbidden_short
       #If no sub-string, sub-HTML or sub-elements are given, we should end the HTML with " />".
       str << " />"
       str << @nl if pretty
     else
       #Write end-of-element and then all sub-elements.
       str << ">"
-      str << @nl if pretty
+      
+      if @eles.empty? and @str.empty? and @str_html.empty? and forbidden_short
+        skip_pretty = true
+      end
+      
+      str << @nl if pretty and !skip_pretty
       
       if !@str.empty?
         str << @inden * (level + 1) if pretty
@@ -182,7 +194,7 @@ class Html_gen::Element
         str << subele.html(pass_args)
       end
       
-      str << @inden * level if pretty and level > 0
+      str << @inden * level if pretty and level > 0 and !skip_pretty
       str << "</#{@name}>"
       str << @nl if pretty
     end
