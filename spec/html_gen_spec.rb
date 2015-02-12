@@ -1,34 +1,46 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require "spec_helper"
 
 describe "HtmlGen" do
-  it "should be able to generate html" do
-    html = Html_gen::Element.new(:td, :classes => [:test]).html(:pretty => false)
-    raise "Expected valid HTML." if html != "<td class=\"test\" />"
-    
-    html = Html_gen::Element.new(:td, :attr => {:colspan => 2}).html(:pretty => false)
-    raise "Expected valid HTML." if html != "<td colspan=\"2\" />"
-    
-    html = Html_gen::Element.new(:td, :css => {:width => "80px"}).html(:pretty => false)
-    raise "Expected valid HTML: '#{html}'." if html != "<td style=\"width: 80px;\" />"
-    
-    a = Html_gen::Element.new(:a)
+  it "generates elements with classes" do
+    html = HtmlGen::Element.new(:td, classes: [:test]).html(pretty: false)
+    html.should eq "<td class=\"test\" />"
+  end
+
+  it "generates elements with attributes" do
+    html = HtmlGen::Element.new(:td, attr: {colspan: 2}).html(pretty: false)
+    html.should eq "<td colspan=\"2\" />"
+  end
+
+  it "generates elements with css attributes" do
+    html = HtmlGen::Element.new(:td, css: {width: "80px"}).html(pretty: false)
+    html.should eq "<td style=\"width: 80px;\" />"
+  end
+
+  it "generates elements with sub elementes" do
+    a = HtmlGen::Element.new(:a)
     b = a.add_ele(:b)
     b.str = "Test"
-    
-    html = a.html(:pretty => false)
-    raise "Expected something else." if html != "<a><b>Test</b></a>"
-    
-    html = Html_gen::Element.new(:b, :str => "<b>Test</b>").html(:pretty => false)
-    raise "Expected escape HTML: '#{html}'." if html != "<b>&lt;b&gt;Test&lt;/b&gt;</b>"
-    
-    html = Html_gen::Element.new(:b, :str_html => "<b>Test</b>").html(:pretty => false)
-    raise "Expected escape HTML: '#{html}'." if html != "<b><b>Test</b></b>"
-    
-    div_ele = Html_gen::Element.new(:div)
+
+    html = a.html(pretty: false)
+    html.should eq "<a><b>Test</b></a>"
+  end
+
+  it "generates elements with string content and escapes it" do
+    html = HtmlGen::Element.new(:b, str: "<b>Test</b>").html(pretty: false)
+    html.should eq "<b>&lt;b&gt;Test&lt;/b&gt;</b>"
+  end
+
+  it "generates elements with html content and doesn't escape it" do
+    html = HtmlGen::Element.new(:b, str_html: "<b>Test</b>").html(pretty: false)
+    html.should eq "<b><b>Test</b></b>"
+  end
+
+  it "supports mixed elements and string content" do
+    div_ele = HtmlGen::Element.new(:div)
     div_ele.add_ele(:br)
     div_ele.add_str("This is a test")
-    
-    html = div_ele.html(:pretty => false)
-    raise "Expected HTML: '#{html}'." if html != "<div><br />This is a test</div>"
+
+    html = div_ele.html(pretty: false)
+    html.should eq "<div><br />This is a test</div>"
   end
 end
