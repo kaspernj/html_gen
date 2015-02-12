@@ -1,3 +1,7 @@
+[![Build Status](https://api.shippable.com/projects/540e7b9b3479c5ea8f9ec21c/badge?branchName=master)](https://app.shippable.com/projects/540e7b9b3479c5ea8f9ec21c/builds/latest)
+[![Code Climate](https://codeclimate.com/github/kaspernj/html_gen/badges/gpa.svg)](https://codeclimate.com/github/kaspernj/html_gen)
+[![Test Coverage](https://codeclimate.com/github/kaspernj/html_gen/badges/coverage.svg)](https://codeclimate.com/github/kaspernj/html_gen)
+
 # HtmlGen
 
 A small and fast framework to parse and generate HTML in Ruby.
