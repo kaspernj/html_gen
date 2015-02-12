@@ -1,25 +1,37 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Parser" do
-  it "should be able generate elements from HTML" do
-    parser = Html_gen::Parser.new(:str => "<html><head><title>Test</title></head><body>This is the body</body></html>")
-    raise "Expected 1 root element but got: '#{parser.eles.length}'." if parser.eles.length != 1
-    
+  let(:parser) { HtmlGen::Parser.new(str: "<html><head><title>Test</title></head><body>This is the body</body></html>") }
+  let(:doc) { HtmlGen::Parser.new(str: "<td colspan=\"2\" style=\"font-weight: bold;\" width='100px' height=50px>test</td>") }
+  let(:td) { doc.eles.first }
+
+  it "detects a single root element" do
+    parser.eles.length.should eq 1
+  end
+
+  it "detects the head and body element under the html element" do
     html = parser.eles.first
-    raise "Expected 2 elements of HTML element but got: '#{html.eles.length}'. #{html.eles_names}" if html.eles.length != 2
-    
-    head = html.eles.first
+    html.eles.length.should eq 2
+  end
+
+  it "reads the head-title element content correct" do
+    head = parser.eles.first.eles.first
     title = head.eles.first
-    raise "Expected name to be 'title' but it wasnt: '#{title.name}'." if title.name != "title"
-    
-    doc = Html_gen::Parser.new(:str => "<td colspan=\"2\" style=\"font-weight: bold;\" width='100px' height=50px>test</td>")
-    td = doc.eles.first
-    
-    raise "Expected name of element to be 'td' but it wasnt: '#{td.name}'." if td.name != "td"
-    raise "Expected colspan to be '2' but it wasnt: '#{td.attr["colspan"]}'." if td.attr["colspan"] != "2"
-    raise "Expected width to be '100px' but it wasnt: '#{td.attr["width"]}'." if td.attr["width"] != "100px"
-    raise "Expected height to be '50px' but it wasnt: '#{td.attr["height"]}'." if td.attr["height"] != "50px"
-    raise "Expected CSS-font-weight to be 'bold' but it wasnt: '#{td.css["font-weight"]}'." if td.css["font-weight"] != "bold"
-    raise "Expected style to be empty but it wasnt: '#{td.attr["style"]}'." if !td.attr["style"].to_s.empty?
+    title.name.should eq "title"
+  end
+
+  it "reads the td elements name" do
+    td.name.should eq "td"
+  end
+
+  it "detects html attributes" do
+    td.attr["colspan"].should eq "2"
+    td.attr["width"].should eq "100px"
+    td.attr["height"].should eq "50px"
+  end
+
+  it "detects CSS attributes" do
+    td.css["font-weight"].should eq "bold"
+    td.attr["style"].to_s.empty?.should eq true
   end
 end
