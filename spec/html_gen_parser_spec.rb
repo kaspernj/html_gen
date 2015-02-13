@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Parser" do
   let(:parser) { HtmlGen::Parser.new(str: "<html><head><title>Test</title></head><body>This is the body</body></html>") }
-  let(:doc) { HtmlGen::Parser.new(str: "<td colspan=\"2\" style=\"font-weight: bold;\" width='100px' height=50px>test</td>") }
+  let(:doc) { HtmlGen::Parser.new(str: "<td colspan=\"2\" data-test=\"test-value\" data-nested-test=\"test-nested-keys\" style=\"font-weight: bold;\" width='100px' height=50px>test</td>") }
   let(:td) { doc.eles.first }
 
   it "detects a single root element" do
@@ -28,6 +28,19 @@ describe "Parser" do
     td.attr["colspan"].should eq "2"
     td.attr["width"].should eq "100px"
     td.attr["height"].should eq "50px"
+  end
+
+  it "detects data attributes" do
+    td.data["test"].should eq "test-value"
+  end
+
+  it "detects nested data key attributes" do
+    td.data["nested"]["test"].should eq "test-nested-keys"
+  end
+
+  it "removes the original attributes" do
+    td.attr["data-test"].should eq nil
+    td.attr["data-nested-test"].should eq nil
   end
 
   it "detects CSS attributes" do
