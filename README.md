@@ -41,6 +41,7 @@ title = head.eles.first
 title.html #=> "Test"
 title.attr #=> {}
 title.css #=> {}
+title.data #=> {}
 ```
 
 ## Contributing to html_gen
