@@ -22,6 +22,9 @@ class HtmlGen::Element
   #  element.css["font-weight"] = "bold"
   attr_reader :css
 
+  #Data hash which will nest keys.
+  attr_reader :data
+
   #Classes-array which will be used to generate the 'class'-attribute.
   #===Example
   #  element.classes += ["class1", "class2"]
@@ -63,7 +66,7 @@ class HtmlGen::Element
     raise "'name' should be a string or a symbol but was a '#{name.class.name}'."if !name.is_a?(String) && !name.is_a?(Symbol)
     @name = name
 
-    {attr: {}, classes: [], str_html: "", str: "", css: {}, eles: [], nl: "\n", inden: "\t"}.each do |arg, default_val|
+    {attr: {}, data: {}, classes: [], str_html: "", str: "", css: {}, eles: [], nl: "\n", inden: "\t"}.each do |arg, default_val|
       if args[arg]
         instance_variable_set("@#{arg}", args[arg])
       else
@@ -130,7 +133,7 @@ class HtmlGen::Element
     str << "<#{@name}"
 
     #Add content from the 'css'-hash to the 'style'-attribute in the right format.
-    if !@css.empty?
+    unless @css.empty?
       style = ""
       @css.each do |key, val|
         style << "; " unless style.empty?
@@ -138,8 +141,7 @@ class HtmlGen::Element
       end
 
       if attr[:style] && !attr[:style].empty?
-        attr[:style] << "; "
-        attr[:style] << style
+        attr[:style] << "; #{style}"
       else
         attr[:style] = style
       end
@@ -161,10 +163,12 @@ class HtmlGen::Element
       str << " #{key}=\"#{HtmlGen.escape_html(val)}\""
     end
 
+    str << " #{data_attributes(@data, "data")}" if @data.any?
+
     forbidden_short = FORBIDDEN_SHORT.include?(@name.to_s)
     skip_pretty = false
 
-    if @eles.empty? and @str.empty? and @str_html.empty? and !forbidden_short
+    if @eles.empty? && @str.empty? && @str_html.empty? && !forbidden_short
       #If no sub-string, sub-HTML or sub-elements are given, we should end the HTML with " />".
       str << " />"
       str << @nl if pretty
@@ -236,5 +240,44 @@ class HtmlGen::Element
         raise "Dont know what to do with style-variable: '#{style}'."
       end
     end
+  end
+
+  def convert_data_attributes_to_data
+    @attr.delete_if do |key, value|
+      match = key.to_s.match(/\Adata-(.+)\Z/)
+
+      if match
+        data_keys = match[1].split("-")
+        last_key = data_keys.pop
+
+        current_data_element = @data
+        data_keys.each do |key_part|
+          current_data_element = current_data_element[key_part] ||= {}
+        end
+
+        current_data_element[last_key] = value
+
+        true
+      else
+        false
+      end
+    end
+  end
+
+private
+
+  def data_attributes(data_hash, prev_key)
+    html = ""
+    data_hash.each do |key, value|
+      if value.is_a?(Hash)
+        html << " " unless html.empty?
+        html << "#{data_attributes(value, "#{prev_key}-#{key}")}"
+      else
+        html << " " unless html.empty?
+        html << "#{prev_key}-#{key}=\"#{HtmlGen.escape_html(value)}\""
+      end
+    end
+
+    return html
   end
 end

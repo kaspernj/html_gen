@@ -29,7 +29,7 @@ class HtmlGen::Parser
     end
   end
 
-  private
+private
 
   #Ensures at least 16kb of data is loaded into the buffer.
   def ensure_buffer
@@ -86,6 +86,7 @@ class HtmlGen::Parser
       elsif end_sign.to_s.strip.empty?
         parse_attr_of_tag(ele, tag_name)
         ele.convert_style_to_css if ele.attr.key?("style") || ele.attr.key?(:style)
+        ele.convert_data_attributes_to_data
         return ele
       else
         parse_content_of_tag(ele, tag_name)

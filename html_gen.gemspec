@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.email = "k@spernj.org"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
@@ -22,14 +22,14 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "html_gen.gemspec",
     "lib/html_gen.rb",
-    "lib/html_gen_element.rb",
-    "lib/html_gen_parser.rb",
-    "lib/html_gen_text_ele.rb",
+    "lib/html_gen/element.rb",
+    "lib/html_gen/parser.rb",
+    "lib/html_gen/text_ele.rb",
     "spec/html_gen_parser_spec.rb",
     "spec/html_gen_spec.rb",
     "spec/spec_helper.rb"
