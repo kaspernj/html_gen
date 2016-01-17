@@ -100,6 +100,13 @@ class HtmlGen::Element
     return ele
   end
 
+  #Add a text-element to the element.
+  def add_html(html)
+    ele = HtmlGen::TextEle.new(html: html, inden: @inden, nl: @nl)
+    @eles << ele
+    return ele
+  end
+
   # Returns the HTML for the element.
   # To avoid indentation and newlines you can use the 'pretty'-argument:
   #  element.html(pretty: false)

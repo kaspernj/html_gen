@@ -3,6 +3,7 @@ class HtmlGen::TextEle
 
   def initialize(args)
     @str = args[:str]
+    @html = args[:html]
     @inden = args[:inden]
     @nl = args[:nl]
   end
@@ -28,7 +29,13 @@ class HtmlGen::TextEle
 
     str = ""
     str << @inden * level if pretty
-    str << HtmlGen.escape_html(@str)
+
+    if @str
+      str << HtmlGen.escape_html(@str)
+    else
+      str << @html
+    end
+
     str << @nl if pretty
 
     return str

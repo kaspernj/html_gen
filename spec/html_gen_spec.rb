@@ -44,6 +44,16 @@ describe "HtmlGen" do
     html.should eq "<div><br />This is a test</div>"
   end
 
+  it "#add_html" do
+    div_ele = HtmlGen::Element.new(:div)
+    div_ele.add_ele(:br)
+    div_ele.add_str("This is a test")
+    div_ele.add_html("<b>test</b>")
+
+    html = div_ele.html(pretty: false)
+    html.should eq "<div><br />This is a test<b>test</b></div>"
+  end
+
   it "supports data attributes" do
     div_ele = HtmlGen::Element.new(:div, str: "Test", data: {test: "value"})
   end
