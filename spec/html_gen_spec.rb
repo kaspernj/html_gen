@@ -62,4 +62,11 @@ describe "HtmlGen" do
     div_ele = HtmlGen::Element.new(:div, str: "Test", data: {deep: {nested: {test: "value", test_underscoe: "test"}}})
     div_ele.html(pretty: false).should eq "<div data-deep-nested-test=\"value\" data-deep-nested-test-underscoe=\"test\">Test</div>"
   end
+
+  it "supports text elements" do
+    div_ele = HtmlGen::Element.new(:div)
+    div_ele.add_str "test"
+
+    div_ele.html.should eq "<div>\n\ttest\n</div>\n"
+  end
 end

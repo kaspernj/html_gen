@@ -26,7 +26,7 @@ private
     !args.key?(:pretty) || args[:pretty]
   end
 
-  def level
+  def level(args)
     if args[:level]
       args[:level]
     else
