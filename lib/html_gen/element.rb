@@ -1,4 +1,4 @@
-#This class can be used to generate HTML.
+# This class can be used to generate HTML.
 #===Examples
 #  ele = HtmlGen::Element.new(:a) #=> #<HtmlGen::Element:0x00000000e5f650 @attr={}, @name=:a, @classes=[], @str_html="", @str="", @css={}, @eles=[], @nl="\n", @inden="\t">
 #  ele.classes << "custom_link"
@@ -10,48 +10,48 @@
 #
 #  ele.html #=> "<a href=\"http://www.youtube.com\" style=\"font-weight: bold;\" class=\"custom_link\">\n\t<b>\n\t\tTitle of link\n\t</b>\n</a>\n"
 class HtmlGen::Element
-  FORBIDDEN_SHORT = ["script"]
+  FORBIDDEN_SHORT = ["script"].freeze
 
-  #Attributes hash which will be used to generate attributes-elements.
+  # Attributes hash which will be used to generate attributes-elements.
   #===Example
   #  element.attr[:href] = "http://www.youtube.com"
   attr_reader :attr
 
-  #CSS-hash which will be used to generate the 'style'-attribute.
+  # CSS-hash which will be used to generate the 'style'-attribute.
   #===Example
   #  element.css["font-weight"] = "bold"
   attr_reader :css
 
-  #Data hash which will nest keys.
+  # Data hash which will nest keys.
   attr_reader :data
 
-  #Classes-array which will be used to generate the 'class'-attribute.
+  # Classes-array which will be used to generate the 'class'-attribute.
   #===Example
   #  element.classes += ["class1", "class2"]
   #  element.html #=> ... class="class1 class2"...
   attr_reader :classes
 
-  #This string is used to generate the value of an element. It will be HTML-escaped.
+  # This string is used to generate the value of an element. It will be HTML-escaped.
   #===Example
   #  element = HtmlGen::Element.new("b")
   #  element.str = "Te<i>s</i>t"
   #  element.html(pretty: false) #=> "<b>Te&lt;i&gt;s&lt;/i&gt;t</b>"
   attr_accessor :str
 
-  #This string is used to generate the value of an element. It will not be HTML-escaped.
+  # This string is used to generate the value of an element. It will not be HTML-escaped.
   #===Example
   #  element = HtmlGen::Element.new("b")
   #  element.str_html = "Te<i>s</i>t"
   #  element.html #=> "<b>Te<i>s</i>t</b>"
   attr_accessor :str_html
 
-  #An array holding all the sub-elements of this element.
+  # An array holding all the sub-elements of this element.
   attr_accessor :eles
 
-  #The name of the element. "a" for <a> and such.
+  # The name of the element. "a" for <a> and such.
   attr_accessor :name
 
-  #You can give various arguments as shortcuts to calling the methods. You can also decide what should be used for newline and indentation.
+  # You can give various arguments as shortcuts to calling the methods. You can also decide what should be used for newline and indentation.
   #  HtmlGen::Element.new(:b, {
   #    css: {"font-weight" => "bold"},
   #    attr: {"href" => "http://www.youtube.com"},
@@ -63,7 +63,7 @@ class HtmlGen::Element
   #    eles: [HtmlGen::Element.new("i", str: "Hello world!")
   #  })
   def initialize(name, args = {})
-    raise "'name' should be a string or a symbol but was a '#{name.class.name}'."if !name.is_a?(String) && !name.is_a?(Symbol)
+    raise "'name' should be a string or a symbol but was a '#{name.class.name}'." if !name.is_a?(String) && !name.is_a?(Symbol)
     @name = name
 
     {attr: {}, data: {}, classes: [], str_html: "", str: "", css: {}, eles: [], nl: "\n", inden: "\t"}.each do |arg, default_val|
@@ -76,10 +76,10 @@ class HtmlGen::Element
       args.delete(arg)
     end
 
-    raise "Unknown arguments: '#{args.keys.join(",")}'." if !args.empty?
+    raise "Unknown arguments: '#{args.keys.join(",")}'." unless args.empty?
   end
 
-  #Adds a sub-element to the element.
+  # Adds a sub-element to the element.
   #===Examples
   #  element = HtmlGen::Element.new("a")
   #  another_ele = element.add_ele("b")
@@ -88,58 +88,58 @@ class HtmlGen::Element
   def add_ele(name, args = {})
     ele = HtmlGen::Element.new(name, args.merge(nl: @nl, inden: @inden))
     @eles << ele
-    return ele
+    ele
   end
 
   alias add add_ele
 
-  #Add a text-element to the element.
+  # Add a text-element to the element.
   def add_str(str)
     ele = HtmlGen::TextEle.new(str: str, inden: @inden, nl: @nl)
     @eles << ele
-    return ele
+    ele
   end
 
-  #Add a text-element to the element.
+  # Add a text-element to the element.
   def add_html(html)
     ele = HtmlGen::TextEle.new(html: html, inden: @inden, nl: @nl)
     @eles << ele
-    return ele
+    ele
   end
 
   # Returns the HTML for the element.
   # To avoid indentation and newlines you can use the 'pretty'-argument:
   #  element.html(pretty: false)
   def html(args = {})
-    if args[:level]
-      level = args[:level]
-    else
-      level = 0
+    level = if args[:level]
+              args[:level]
+            else
+              0
     end
 
-    if args.key?(:pretty)
-      pretty = args[:pretty]
-    else
-      pretty = true
+    pretty = if args.key?(:pretty)
+               args[:pretty]
+             else
+               true
     end
 
-    #Used for keeping 'pretty'-value and correct indentation according to parent elements.
+    # Used for keeping 'pretty'-value and correct indentation according to parent elements.
     pass_args = {level: (level + 1), pretty: pretty, inden: @inden}
 
-    #Clone the attributes-hash since we are going to add stuff to it, and it shouldnt be reflected (if 'html' is called multiple times, it will bug unless we clone).
+    # Clone the attributes-hash since we are going to add stuff to it, and it shouldnt be reflected (if 'html' is called multiple times, it will bug unless we clone).
     attr = @attr.clone
 
-    #Start generating the string with HTML (possible go give a custom 'str'-variable where the content should be pushed to).
-    if args[:str]
-      str = args[:str]
-    else
-      str = ""
+    # Start generating the string with HTML (possible go give a custom 'str'-variable where the content should be pushed to).
+    str = if args[:str]
+            args[:str]
+          else
+            ""
     end
 
     str << @inden * level if pretty && level > 0
     str << "<#{@name}"
 
-    #Add content from the 'css'-hash to the 'style'-attribute in the right format.
+    # Add content from the 'css'-hash to the 'style'-attribute in the right format.
     unless @css.empty?
       style = ""
       @css.each do |key, val|
@@ -154,7 +154,7 @@ class HtmlGen::Element
       end
     end
 
-    #Add content from the 'classes'-array to the 'class'-attribute in the right format.
+    # Add content from the 'classes'-array to the 'class'-attribute in the right format.
     unless @classes.empty?
       class_str = @classes.join(" ")
 
@@ -165,7 +165,7 @@ class HtmlGen::Element
       end
     end
 
-    #Write out the attributes to the string.
+    # Write out the attributes to the string.
     attr.each do |key, val|
       str << " #{key}=\"#{HtmlGen.escape_html(val)}\""
     end
@@ -176,11 +176,11 @@ class HtmlGen::Element
     skip_pretty = false
 
     if @eles.empty? && @str.empty? && @str_html.empty? && !forbidden_short
-      #If no sub-string, sub-HTML or sub-elements are given, we should end the HTML with " />".
+      # If no sub-string, sub-HTML or sub-elements are given, we should end the HTML with " />".
       str << " />"
       str << @nl if pretty
     else
-      #Write end-of-element and then all sub-elements.
+      # Write end-of-element and then all sub-elements.
       str << ">"
 
       if @eles.empty? && @str.empty? && @str_html.empty? && forbidden_short
@@ -210,21 +210,20 @@ class HtmlGen::Element
       str << @nl if pretty
     end
 
-    #Returns the string.
-    return str
+    str
   end
 
-  #Returns the names of all sub-elements in an array.
+  # Returns the names of all sub-elements in an array.
   def eles_names
     names = []
     @eles.each do |ele|
       names << ele.name
     end
 
-    return names
+    names
   end
 
-  #Converts the content of the 'style'-attribute to css-hash-content.
+  # Converts the content of the 'style'-attribute to css-hash-content.
   def convert_style_to_css
     if !@attr[:style].to_s.strip.empty?
       style = @attr[:style]
@@ -235,13 +234,13 @@ class HtmlGen::Element
     end
 
     loop do
-      if match = style.match(/\A\s*(\S+?):\s*(.+?)\s*(;|\Z)/)
+      if (match = style.match(/\A\s*(\S+?):\s*(.+?)\s*(;|\Z)/))
         style.gsub!(match[0], "")
         key = match[1]
         val = match[2]
         raise "Such a key already exists in CSS-hash: '#{key}'." if @css.key?(key)
         @css[key] = val
-      elsif match = style.slice!(/\A\s*\Z/)
+      elsif (match = style.slice!(/\A\s*\Z/))
         break
       else
         raise "Dont know what to do with style-variable: '#{style}'."
@@ -276,15 +275,17 @@ private
   def data_attributes(data_hash, prev_key)
     html = ""
     data_hash.each do |key, value|
+      key = key.to_s.tr("_", "-") if key.is_a?(Symbol)
+
       if value.is_a?(Hash)
         html << " " unless html.empty?
-        html << "#{data_attributes(value, "#{prev_key}-#{key}")}"
+        html << data_attributes(value, "#{prev_key}-#{key}").to_s
       else
         html << " " unless html.empty?
         html << "#{prev_key}-#{key}=\"#{HtmlGen.escape_html(value)}\""
       end
     end
 
-    return html
+    html
   end
 end

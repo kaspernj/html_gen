@@ -8,36 +8,37 @@ class HtmlGen::TextEle
     @nl = args[:nl]
   end
 
-  #Returns the text that this element holds.
-  def str
-    return @str
+  # Returns the text that this element holds.
+  attr_reader :str
+
+  # Returns the text HTML-escaped.
+  def html(args)
+    str = ""
+    str << @inden * level(args) if pretty?(args)
+    str << html_content
+    str << @nl if pretty?(args)
+    str
   end
 
-  #Returns the text HTML-escaped.
-  def html(args)
+private
+
+  def pretty?(args)
+    !args.key?(:pretty) || args[:pretty]
+  end
+
+  def level
     if args[:level]
-      level = args[:level]
+      args[:level]
     else
-      level = 0
+      0
     end
+  end
 
-    if !args.key?(:pretty) or args[:pretty]
-      pretty = true
-    else
-      pretty = false
-    end
-
-    str = ""
-    str << @inden * level if pretty
-
+  def html_content
     if @str
-      str << HtmlGen.escape_html(@str)
+      HtmlGen.escape_html(@str)
     else
-      str << @html
+      @html
     end
-
-    str << @nl if pretty
-
-    return str
   end
 end

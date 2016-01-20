@@ -42,28 +42,27 @@ Gem::Specification.new do |s|
   s.rubygems_version = "2.2.2"
   s.summary = "A small framework for generating HTML."
 
-  if s.respond_to? :specification_version then
+  if s.respond_to? :specification_version
     s.specification_version = 4
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<string-cases>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
-      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_development_dependency(%q<bundler>, [">= 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new("1.2.0")
+      s.add_runtime_dependency("string-cases", [">= 0"])
+      s.add_development_dependency("rspec", ["~> 2.8.0"])
+      s.add_development_dependency("rdoc", ["~> 3.12"])
+      s.add_development_dependency("bundler", [">= 1.0.0"])
+      s.add_development_dependency("jeweler", ["~> 1.8.4"])
     else
-      s.add_dependency(%q<string-cases>, [">= 0"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
-      s.add_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_dependency(%q<bundler>, [">= 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency("string-cases", [">= 0"])
+      s.add_dependency("rspec", ["~> 2.8.0"])
+      s.add_dependency("rdoc", ["~> 3.12"])
+      s.add_dependency("bundler", [">= 1.0.0"])
+      s.add_dependency("jeweler", ["~> 1.8.4"])
     end
   else
-    s.add_dependency(%q<string-cases>, [">= 0"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
-    s.add_dependency(%q<rdoc>, ["~> 3.12"])
-    s.add_dependency(%q<bundler>, [">= 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency("string-cases", [">= 0"])
+    s.add_dependency("rspec", ["~> 2.8.0"])
+    s.add_dependency("rdoc", ["~> 3.12"])
+    s.add_dependency("bundler", [">= 1.0.0"])
+    s.add_dependency("jeweler", ["~> 1.8.4"])
   end
 end
-

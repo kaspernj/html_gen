@@ -6,7 +6,7 @@ class HtmlGen
   def self.const_missing(name)
     file_path = "#{File.dirname(__FILE__)}/html_gen/#{::StringCases.camel_to_snake(name)}.rb"
 
-    if File.exists?(file_path)
+    if File.exist?(file_path)
       require file_path
       return HtmlGen.const_get(name) if HtmlGen.const_defined?(name)
     end
@@ -16,6 +16,6 @@ class HtmlGen
 
   # Escapes HTML from the given string. This is to avoid any dependencies and should not be used by other libs.
   def self.escape_html(string)
-    return string.to_s.gsub(/&/, "&amp;").gsub(/\"/, "&quot;").gsub(/>/, "&gt;").gsub(/</, "&lt;")
+    string.to_s.gsub(/&/, "&amp;").gsub(/\"/, "&quot;").gsub(/>/, "&gt;").gsub(/</, "&lt;")
   end
 end
