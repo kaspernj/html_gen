@@ -111,16 +111,16 @@ class HtmlGen::Element
   # To avoid indentation and newlines you can use the 'pretty'-argument:
   #  element.html(pretty: false)
   def html(args = {})
-    level = if args[:level]
-              args[:level]
-            else
-              0
+    if args[:level]
+      level = args[:level]
+    else
+      level = 0
     end
 
-    pretty = if args.key?(:pretty)
-               args[:pretty]
-             else
-               true
+    if args.key?(:pretty)
+      pretty = args[:pretty]
+    else
+      pretty = true
     end
 
     # Used for keeping 'pretty'-value and correct indentation according to parent elements.
@@ -130,10 +130,10 @@ class HtmlGen::Element
     attr = @attr.clone
 
     # Start generating the string with HTML (possible go give a custom 'str'-variable where the content should be pushed to).
-    str = if args[:str]
-            args[:str]
-          else
-            ""
+    if args[:str]
+      str = args[:str]
+    else
+      str = ""
     end
 
     str << @inden * level if pretty && level > 0
@@ -191,7 +191,13 @@ class HtmlGen::Element
 
       unless @str.empty?
         str << @inden * (level + 1) if pretty
-        str << HtmlGen.escape_html(@str)
+
+        if @str.respond_to?(:html_safe?) && @str.html_safe?
+          str << @str
+        else
+          str << HtmlGen.escape_html(@str)
+        end
+
         str << @nl if pretty
       end
 
