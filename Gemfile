@@ -13,6 +13,6 @@ group :development do
   gem "rdoc", "~> 3.12"
   gem "bundler", ">= 1.0.0"
   gem "jeweler", "~> 1.8.4"
-  gem "best_practice_project", github: "kaspernj/best_practice_project"
-  gem "rubocop"
+  gem "best_practice_project", github: "kaspernj/best_practice_project", require: false
+  gem "rubocop", require: false
 end
