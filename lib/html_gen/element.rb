@@ -216,6 +216,7 @@ class HtmlGen::Element
       str << @nl if pretty
     end
 
+    str = str.html_safe if str.respond_to?(:html_safe)
     str
   end
 
