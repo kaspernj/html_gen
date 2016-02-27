@@ -1,3 +1,4 @@
+
 [![Code Climate](https://codeclimate.com/github/kaspernj/html_gen/badges/gpa.svg)](https://codeclimate.com/github/kaspernj/html_gen)
 [![Test Coverage](https://codeclimate.com/github/kaspernj/html_gen/badges/coverage.svg)](https://codeclimate.com/github/kaspernj/html_gen)
 [![Build Status](https://img.shields.io/shippable/540e7b9b3479c5ea8f9ec21c.svg)](https://app.shippable.com/projects/540e7b9b3479c5ea8f9ec21c/builds/latest)
