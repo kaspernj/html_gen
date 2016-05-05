@@ -28,6 +28,11 @@ p.add_str "Test"
 div.html #=> '<div width="100px" style="height: 50px;" class="class1 class2">Hello world<p>Test</p></div>'
 ```
 
+With text in initializer:
+```ruby
+HtmlGen::Element.new(:div, str: "Hello world")
+```
+
 ### Parse HTML into elements
 
 ```ruby
