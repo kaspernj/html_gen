@@ -2,7 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + "/spec_helper")
 
 describe "Parser" do
   let(:parser) { HtmlGen::Parser.new(str: "<html><head><title>Test</title></head><body>This is the body</body></html>") }
-  let(:doc) { HtmlGen::Parser.new(str: "<td colspan=\"2\" data-test=\"test-value\" data-nested-test=\"test-nested-keys\" style=\"font-weight: bold;\" width='100px' height=50px>test</td>") }
+  let(:doc) do
+    HtmlGen::Parser.new(
+      str: "<td colspan=\"2\" data-test=\"test-value\" data-nested-test=\"test-nested-keys\" style=\"font-weight: bold;\" width='100px' height=50px>test</td>"
+    )
+  end
   let(:td) { doc.eles.first }
 
   it "detects a single root element" do

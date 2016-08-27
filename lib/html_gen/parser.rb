@@ -102,7 +102,7 @@ private
   # Parses all attributes of the current tag.
   def parse_attr_of_tag(ele, tag_name)
     loop do
-      if match = search(/\A\s*(\S+)=(\"|'|)/)
+      if (match = search(/\A\s*(\S+)=(\"|'|)/))
         attr_name = match[1]
         raise "Attribute already exists on element: '#{attr_name}'." if ele.attr.key?(attr_name)
 
@@ -160,16 +160,16 @@ private
     loop do
       if search(/\A\s*\Z/)
         raise "Could not find end of tag: '#{tag_name}'."
-      elsif match = search(/\A\s*<\s*\/\s*#{Regexp.escape(tag_name)}\s*>\s*/i)
+      elsif (match = search(/\A\s*<\s*\/\s*#{Regexp.escape(tag_name)}\s*>\s*/i))
         puts "Found end: '#{match.to_a}' for '#{@eles_t.last.name}'." if @debug
         ele = @eles_t.pop
         raise "Expected ele-name to be: '#{tag_name}' but it wasnt: '#{ele.name}'." if ele.name.to_s != tag_name
 
         break
-      elsif new_ele = parse_tag(false: true)
+      elsif (new_ele = parse_tag(false: true))
         puts "Found new element '#{new_ele.name}' and adding it to '#{ele.name}'." if @debug
         # ele.eles << new_ele
-      elsif match = search(/\A(.+?)(<|\Z)/)
+      elsif (match = search(/\A(.+?)(<|\Z)/))
         puts "Text-content-match: '#{match.to_a}'." if @debug
 
         # Put end back into buffer.

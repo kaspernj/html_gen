@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "HtmlGen" do
+describe HtmlGen do
   it "generates elements with classes" do
     html = HtmlGen::Element.new(:td, classes: [:test]).html(pretty: false)
     html.should eq "<td class=\"test\" />"
@@ -67,6 +67,20 @@ describe "HtmlGen" do
     div_ele = HtmlGen::Element.new(:div)
     div_ele.add_str "test"
 
-    div_ele.html.should eq "<div>\n\ttest\n</div>\n"
+    div_ele.html.should eq "<div>\n  test\n</div>\n"
+  end
+
+  it "adds recursive sub elements correctly" do
+    progress = HtmlGen::Element.new(:div, classes: ["progress"])
+    progress_bar = progress.add_ele(:div, classes: ["progress-bar"])
+    progress_bar_text = progress.add_ele(:div, classes: ["bb-progress-bar-text"], str: "Test")
+
+    progress.eles.length.should eq 2
+    progress_bar.eles.length.should eq 0
+    progress_bar_text.eles.length.should eq 0
+
+    html = progress.html(pretty: false)
+
+    html.should eq "<div class=\"progress\"><div class=\"progress-bar\"></div><div class=\"bb-progress-bar-text\">Test</div></div>"
   end
 end
