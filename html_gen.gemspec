@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<jeweler>, ["~> 2.1"])
       s.add_development_dependency(%q<best_practice_project>, [">= 0"])
       s.add_development_dependency(%q<rubocop>, [">= 0"])
     else
@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, [">= 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<jeweler>, ["~> 2.1"])
       s.add_dependency(%q<best_practice_project>, [">= 0"])
       s.add_dependency(%q<rubocop>, [">= 0"])
     end
@@ -69,7 +69,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, [">= 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<jeweler>, ["~> 2.1"])
     s.add_dependency(%q<best_practice_project>, [">= 0"])
     s.add_dependency(%q<rubocop>, [">= 0"])
   end
