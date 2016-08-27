@@ -1,6 +1,6 @@
 # This class can be used to generate HTML.
 #===Examples
-#  ele = HtmlGen::Element.new(:a) #=> #<HtmlGen::Element:0x00000000e5f650 @attr={}, @name=:a, @classes=[], @str_html="", @str="", @css={}, @eles=[], @nl="\n", @inden="\t">
+#  ele = HtmlGen::Element.new(:a) #=> #<HtmlGen::Element:0x00000000e5f650 @attr={}, @name=:a, @classes=[], @str_html="" ...>
 #  ele.classes << "custom_link"
 #  ele.css["font-weight"] = "bold"
 #  ele.attr[:href] = "http://www.youtube.com"
@@ -10,7 +10,7 @@
 #
 #  ele.html #=> "<a href=\"http://www.youtube.com\" style=\"font-weight: bold;\" class=\"custom_link\">\n\t<b>\n\t\tTitle of link\n\t</b>\n</a>\n"
 class HtmlGen::Element
-  FORBIDDEN_SHORT = ["div", "script", "span"].freeze
+  FORBIDDEN_SHORT = %w(div script span).freeze
 
   # Attributes hash which will be used to generate attributes-elements.
   #===Example
@@ -126,7 +126,8 @@ class HtmlGen::Element
     # Used for keeping 'pretty'-value and correct indentation according to parent elements.
     pass_args = {level: (level + 1), pretty: pretty, inden: @inden}
 
-    # Clone the attributes-hash since we are going to add stuff to it, and it shouldnt be reflected (if 'html' is called multiple times, it will bug unless we clone).
+    # Clone the attributes-hash since we are going to add stuff to it, and it shouldnt be reflected
+    # (if 'html' is called multiple times, it will bug unless we clone).
     attr = @attr.clone
 
     # Start generating the string with HTML (possible go give a custom 'str'-variable where the content should be pushed to).

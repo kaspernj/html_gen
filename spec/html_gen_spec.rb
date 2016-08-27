@@ -71,18 +71,16 @@ describe HtmlGen do
   end
 
   it "adds recursive sub elements correctly" do
-    container = HtmlGen::Element.new(:div, classes: ["container"])
-    progress = container.add_ele(:div, classes: ["progress"])
+    progress = HtmlGen::Element.new(:div, classes: ["progress"])
     progress_bar = progress.add_ele(:div, classes: ["progress-bar"])
     progress_bar_text = progress.add_ele(:div, classes: ["bb-progress-bar-text"], str: "Test")
 
-    container.eles.length.should eq 1
     progress.eles.length.should eq 2
     progress_bar.eles.length.should eq 0
     progress_bar_text.eles.length.should eq 0
 
-    html = container.html(pretty: false)
+    html = progress.html(pretty: false)
 
-    html.should eq "<div class=\"container\"><div class=\"progress\"><div class=\"progress-bar\"></div><div class=\"bb-progress-bar-text\">Test</div></div></div>"
+    html.should eq "<div class=\"progress\"><div class=\"progress-bar\"></div><div class=\"bb-progress-bar-text\">Test</div></div>"
   end
 end
