@@ -10,7 +10,7 @@
 #
 #  ele.html #=> "<a href=\"http://www.youtube.com\" style=\"font-weight: bold;\" class=\"custom_link\">\n\t<b>\n\t\tTitle of link\n\t</b>\n</a>\n"
 class HtmlGen::Element
-  FORBIDDEN_SHORT = ["script"].freeze
+  FORBIDDEN_SHORT = ["div", "script", "span"].freeze
 
   # Attributes hash which will be used to generate attributes-elements.
   #===Example
@@ -66,7 +66,7 @@ class HtmlGen::Element
     raise "'name' should be a string or a symbol but was a '#{name.class.name}'." if !name.is_a?(String) && !name.is_a?(Symbol)
     @name = name
 
-    {attr: {}, data: {}, classes: [], str_html: "", str: "", css: {}, eles: [], nl: "\n", inden: "\t"}.each do |arg, default_val|
+    {attr: {}, data: {}, classes: [], str_html: "", str: "", css: {}, eles: [], nl: "\n", inden: "  "}.each do |arg, default_val|
       if args[arg]
         instance_variable_set("@#{arg}", args[arg])
       else
