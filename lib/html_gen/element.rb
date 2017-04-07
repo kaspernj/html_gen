@@ -10,7 +10,7 @@
 #
 #  ele.html #=> "<a href=\"http://www.youtube.com\" style=\"font-weight: bold;\" class=\"custom_link\">\n\t<b>\n\t\tTitle of link\n\t</b>\n</a>\n"
 class HtmlGen::Element
-  FORBIDDEN_SHORT = %w(div script span).freeze
+  FORBIDDEN_SHORT = %w(div i script span).freeze
 
   # Attributes hash which will be used to generate attributes-elements.
   #===Example
