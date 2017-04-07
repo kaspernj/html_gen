@@ -1,17 +1,12 @@
-GIT
-  remote: git://github.com/kaspernj/best_practice_project.git
-  revision: 85edcdab3e63de1374de10f01fcf4a621099aae2
-  specs:
-    best_practice_project (0.0.8)
-      auto_autoloader
-
 GEM
   remote: http://rubygems.org/
   specs:
     addressable (2.4.0)
     ast (2.2.0)
-    auto_autoloader (0.0.4)
+    auto_autoloader (0.0.5)
       string-cases
+    best_practice_project (0.0.10)
+      auto_autoloader (>= 0.0.5)
     builder (3.2.2)
     codeclimate-test-reporter (0.4.6)
       simplecov (>= 0.7.1, < 1.0.0)
@@ -91,7 +86,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  best_practice_project!
+  best_practice_project (= 0.0.10)
   bundler (>= 1.0.0)
   codeclimate-test-reporter
   jeweler (~> 2.1)
@@ -101,4 +96,4 @@ DEPENDENCIES
   string-cases
 
 BUNDLED WITH
-   1.12.5
+   1.13.7
