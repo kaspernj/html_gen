@@ -107,6 +107,14 @@ class HtmlGen::Element
     ele
   end
 
+  def add_html_if_safe(html)
+    if html.respond_to?(:html_safe?) && html.html_safe?
+      add_html(html)
+    else
+      add_str(html)
+    end
+  end
+
   # Returns the HTML for the element.
   # To avoid indentation and newlines you can use the 'pretty'-argument:
   #  element.html(pretty: false)
