@@ -92,7 +92,7 @@ private
       end
     else
       if args[:false]
-        return false
+        false
       else
         raise "Dont know what to do with buffer: '#{@buffer}'."
       end
