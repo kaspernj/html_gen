@@ -15,4 +15,6 @@ group :development, :test do
   gem "rdoc", "~> 3.12"
   gem "rspec", "3.5.0"
   gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rspec", require: false
 end

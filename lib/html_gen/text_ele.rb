@@ -27,11 +27,7 @@ private
   end
 
   def level(args)
-    if args[:level]
-      args[:level]
-    else
-      0
-    end
+    args[:level] || 0
   end
 
   def html_content
