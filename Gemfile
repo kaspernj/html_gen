@@ -3,7 +3,6 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 
-gem "codeclimate-test-reporter", group: :test, require: nil
 gem "string-cases"
 
 # Add dependencies to develop your gem here.
