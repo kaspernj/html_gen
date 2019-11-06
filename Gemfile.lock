@@ -25,7 +25,7 @@ GEM
       oauth2
     hashie (3.5.6)
     highline (1.7.8)
-    jaro_winkler (1.5.3)
+    jaro_winkler (1.5.4)
     jeweler (2.3.3)
       builder
       bundler (>= 1.0)
@@ -74,7 +74,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rubocop (0.75.1)
+    rubocop (0.76.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
