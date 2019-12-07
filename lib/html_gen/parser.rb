@@ -80,15 +80,15 @@ private
         puts "End of element '#{tag_name}' for '#{@eles_t.last.name}'." if @debug
         ele = @eles_t.pop
         raise "Expected ele-name to be: '#{tag_name}' but it wasnt: '#{ele.name}'." if ele.name.to_s != tag_name
-        return ele
+        ele
       elsif end_sign.to_s.strip.empty?
         parse_attr_of_tag(ele, tag_name)
         ele.convert_style_to_css if ele.attr.key?("style") || ele.attr.key?(:style)
         ele.convert_data_attributes_to_data
-        return ele
+        ele
       else
         parse_content_of_tag(ele, tag_name)
-        return ele
+        ele
       end
     else
       if args[:false]
