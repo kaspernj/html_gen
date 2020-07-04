@@ -16,6 +16,6 @@ class HtmlGen
 
   # Escapes HTML from the given string. This is to avoid any dependencies and should not be used by other libs.
   def self.escape_html(string)
-    string.to_s.gsub(/&/, "&amp;").gsub(/\"/, "&quot;").gsub(/>/, "&gt;").gsub(/</, "&lt;")
+    string.to_s.gsub(/&/, "&amp;").gsub(/"/, "&quot;").gsub(/>/, "&gt;").gsub(/</, "&lt;")
   end
 end

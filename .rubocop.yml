@@ -24,11 +24,17 @@ Layout/CaseIndentation:
 Layout/EmptyLines:
   Enabled: false
 
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
 Layout/EmptyLinesAroundArguments:
   Enabled: false
 
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
+
+Layout/LineLength:
+  Max: 160
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -39,8 +45,23 @@ Layout/MultilineOperationIndentation:
 Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
 
 # Metrics/AbcSize:
 #   Max: 25
@@ -53,9 +74,6 @@ Metrics/ClassLength:
 
 # Metrics/CyclomaticComplexity:
 #   Max: 10
-
-Metrics/LineLength:
-  Max: 160
 
 # Metrics/MethodLength:
 #   Max: 50
@@ -102,8 +120,20 @@ Style/ConditionalAssignment:
 Style/Documentation:
   Enabled: false
 
+Style/ExponentialNotation:
+  Enabled: true
+
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
 
 # Will report offences for many places that are much more readable without using a guard clause
 Style/GuardClause:
@@ -118,8 +148,20 @@ Style/LambdaCall:
 Style/MultipleComparison:
   Enabled: false
 
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
 Style/RegexpLiteral:
   Enabled: false
+
+Style/SlicingWithRange:
+  Enabled: true
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
