@@ -118,12 +118,8 @@ class HtmlGen::Element
   # Returns the HTML for the element.
   # To avoid indentation and newlines you can use the 'pretty'-argument:
   #  element.html(pretty: false)
-  def html(args = {})
-    if args[:level]
-      level = args[:level]
-    else
-      level = 0
-    end
+  def html(args = {}) # rubocop:disable Metrics/CyclomaticComplexity
+    level = args[:level] || 0
 
     if args.key?(:pretty)
       pretty = args[:pretty]

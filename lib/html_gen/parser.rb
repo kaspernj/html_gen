@@ -102,7 +102,7 @@ private
   # Parses all attributes of the current tag.
   def parse_attr_of_tag(ele, tag_name)
     loop do
-      if (match = search(/\A\s*(\S+)=(\"|'|)/))
+      if (match = search(/\A\s*(\S+)=("|'|)/))
         attr_name = match[1]
         raise "Attribute already exists on element: '#{attr_name}'." if ele.attr.key?(attr_name)
 
