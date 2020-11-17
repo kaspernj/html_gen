@@ -112,6 +112,9 @@ RSpec/NamedSubject:
 RSpec/NestedGroups:
   Enabled: false
 
+RSpec/StubbedMock:
+  Enabled: false
+
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
