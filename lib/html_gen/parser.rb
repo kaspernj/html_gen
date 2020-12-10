@@ -33,10 +33,10 @@ private
   def ensure_buffer
     while @buffer.length < 16_384 && !@eof
       str = @io.gets(16_384)
-      if !str
-        @eof = true
-      else
+      if str
         @buffer << str
+      else
+        @eof = true
       end
     end
   end
