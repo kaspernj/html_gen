@@ -1,8 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    addressable (2.5.1)
-      public_suffix (~> 2.0, >= 2.0.2)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     auto_autoloader (0.0.5)
       string-cases
@@ -54,7 +54,7 @@ GEM
     parser (3.0.1.1)
       ast (~> 2.4.1)
     psych (2.2.4)
-    public_suffix (2.0.5)
+    public_suffix (4.0.6)
     rack (2.2.3)
     rainbow (3.0.0)
     rake (13.0.0)
