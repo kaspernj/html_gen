@@ -141,7 +141,7 @@ class HtmlGen::Element
       str = ""
     end
 
-    str << @inden * level if pretty && level > 0
+    str << (@inden * level) if pretty && level > 0
     str << "<#{@name}"
 
     # Add content from the 'css'-hash to the 'style'-attribute in the right format.
@@ -195,7 +195,7 @@ class HtmlGen::Element
       str << @nl if pretty && !skip_pretty
 
       unless @str.empty?
-        str << @inden * (level + 1) if pretty
+        str << (@inden * (level + 1)) if pretty
 
         if @str.respond_to?(:html_safe?) && @str.html_safe?
           str << @str
@@ -207,7 +207,7 @@ class HtmlGen::Element
       end
 
       unless @str_html.empty?
-        str << @inden * (level + 1) if pretty
+        str << (@inden * (level + 1)) if pretty
         str << @str_html
         str << @nl if pretty
       end
@@ -216,7 +216,7 @@ class HtmlGen::Element
         str << subele.html(pass_args)
       end
 
-      str << @inden * level if pretty && level > 0 && !skip_pretty
+      str << (@inden * level) if pretty && level > 0 && !skip_pretty
       str << "</#{@name}>"
       str << @nl if pretty
     end

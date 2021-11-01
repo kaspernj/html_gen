@@ -14,7 +14,7 @@ class HtmlGen::TextEle
   # Returns the text HTML-escaped.
   def html(args)
     str = ""
-    str << @inden * level(args) if pretty?(args)
+    str << (@inden * level(args)) if pretty?(args)
     str << html_content
     str << @nl if pretty?(args)
     str
