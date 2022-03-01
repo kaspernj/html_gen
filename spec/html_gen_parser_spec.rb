@@ -43,12 +43,12 @@ describe "Parser" do
   end
 
   it "removes the original attributes" do
-    td.attr["data-test"].should eq nil
-    td.attr["data-nested-test"].should eq nil
+    td.attr["data-test"].should be_nil
+    td.attr["data-nested-test"].should be_nil
   end
 
   it "detects CSS attributes" do
     td.css["font-weight"].should eq "bold"
-    td.attr["style"].to_s.empty?.should eq true
+    td.attr["style"].to_s.empty?.should be true
   end
 end
