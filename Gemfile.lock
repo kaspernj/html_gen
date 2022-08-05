@@ -91,8 +91,8 @@ GEM
     rubocop-performance (1.14.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rspec (2.11.1)
-      rubocop (~> 1.19)
+    rubocop-rspec (2.12.1)
+      rubocop (~> 1.31)
     ruby-progressbar (1.11.0)
     semver2 (3.4.2)
     string-cases (0.0.4)
@@ -114,4 +114,4 @@ DEPENDENCIES
   string-cases
 
 BUNDLED WITH
-   1.17.3
+   2.3.16

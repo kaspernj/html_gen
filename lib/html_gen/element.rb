@@ -135,11 +135,7 @@ class HtmlGen::Element
     attr = @attr.clone
 
     # Start generating the string with HTML (possible go give a custom 'str'-variable where the content should be pushed to).
-    if args[:str]
-      str = args[:str]
-    else
-      str = ""
-    end
+    str = args[:str] || ""
 
     str << (@inden * level) if pretty && level > 0
     str << "<#{@name}"
