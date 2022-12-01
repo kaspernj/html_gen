@@ -37,7 +37,6 @@ GEM
       rake
       rdoc
       semver2
-    json (1.8.6)
     jwt (1.5.6)
     mini_portile2 (2.1.0)
     multi_json (1.12.1)
@@ -60,8 +59,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.0)
     rchardet (1.8.0)
-    rdoc (3.12.2)
-      json (~> 1.4)
+    rdoc (6.3.3)
     regexp_parser (2.6.0)
     rexml (3.2.5)
     rspec (3.5.0)
@@ -106,7 +104,7 @@ DEPENDENCIES
   best_practice_project (= 0.0.10)
   bundler (>= 1.0.0)
   jeweler (= 2.3.3)
-  rdoc (~> 3.12)
+  rdoc (~> 6.3)
   rspec (= 3.5.0)
   rubocop
   rubocop-performance
