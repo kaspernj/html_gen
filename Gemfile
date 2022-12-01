@@ -10,7 +10,7 @@ gem "string-cases"
 group :development, :test do
   gem "best_practice_project", "0.0.12", require: false
   gem "bundler", ">= 1.0.0"
-  gem "jeweler", "2.3.3"
+  gem "jeweler", "2.3.5"
   gem "rdoc", "~> 6.3"
   gem "rspec", "3.5.0"
   gem "rubocop", require: false
