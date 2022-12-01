@@ -6,7 +6,7 @@ GEM
     ast (2.4.2)
     auto_autoloader (0.0.5)
       string-cases
-    best_practice_project (0.0.10)
+    best_practice_project (0.0.12)
       auto_autoloader (>= 0.0.5)
     builder (3.2.3)
     descendants_tracker (0.0.4)
@@ -101,7 +101,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  best_practice_project (= 0.0.10)
+  best_practice_project (= 0.0.12)
   bundler (>= 1.0.0)
   jeweler (= 2.3.3)
   rdoc (~> 6.3)
