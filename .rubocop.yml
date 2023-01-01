@@ -112,6 +112,9 @@ RSpec/NamedSubject:
 RSpec/NestedGroups:
   Enabled: false
 
+RSpec/NoExpectationExample:
+  Enabled: false
+
 RSpec/StubbedMock:
   Enabled: false
 
