@@ -56,14 +56,14 @@ GEM
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
-    psych (5.1.1.1)
+    psych (5.1.2)
       stringio
     racc (1.7.2)
     rack (2.2.6.4)
     rainbow (3.1.1)
     rake (13.0.6)
     rchardet (1.8.0)
-    rdoc (6.6.0)
+    rdoc (6.6.2)
       psych (>= 4.0.0)
     regexp_parser (2.8.2)
     rexml (3.2.6)
