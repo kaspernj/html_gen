@@ -68,9 +68,9 @@ class HtmlGen::Element
 
     {attr: {}, data: {}, classes: [], str_html: "", str: "", css: {}, eles: [], nl: "\n", inden: "  "}.each do |arg, default_val|
       if args[arg]
-        instance_variable_set("@#{arg}", args[arg])
+        instance_variable_set(:"@#{arg}", args[arg])
       else
-        instance_variable_set("@#{arg}", default_val)
+        instance_variable_set(:"@#{arg}", default_val)
       end
 
       args.delete(arg)
