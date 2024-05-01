@@ -223,12 +223,7 @@ class HtmlGen::Element
 
   # Returns the names of all sub-elements in an array.
   def eles_names
-    names = []
-    @eles.each do |ele|
-      names << ele.name
-    end
-
-    names
+    @eles.map(&:name)
   end
 
   # Converts the content of the 'style'-attribute to css-hash-content.
