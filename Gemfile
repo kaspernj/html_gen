@@ -12,7 +12,7 @@ group :development, :test do
   gem "bundler", ">= 1.0.0"
   gem "jeweler", "2.3.9"
   gem "rdoc", "~> 6.13"
-  gem "rspec", "3.13.0"
+  gem "rspec", "3.13.1"
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rspec", require: false
