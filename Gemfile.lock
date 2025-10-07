@@ -63,7 +63,7 @@ GEM
       date
       stringio
     racc (1.8.1)
-    rack (2.2.18)
+    rack (2.2.19)
     rainbow (3.1.1)
     rake (13.0.6)
     rchardet (1.8.0)
