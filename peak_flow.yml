@@ -54,12 +54,9 @@ builds:
       - "Gemfile.lock"
       - "Rakefile"
       - "html_gen.gemspec"
-      - ".ruby-version"
       - ".rubocop.yml"
       - ".rubocop_todo.yml"
-      - "VERSION"
       - "peak_flow.yml"
-      - ".github/**"
       - "!docs/**"
       - "!spec/docs/**"
     script:
