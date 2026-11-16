@@ -4,15 +4,63 @@ builds:
     environment:
       RUBY_VERSION: 2.7.8
     name: Ruby 2.7.8
+    paths:
+      - "lib/**"
+      - "spec/**"
+      - "*.rb"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "Rakefile"
+      - "html_gen.gemspec"
+      - ".ruby-version"
+      - ".rubocop.yml"
+      - ".rubocop_todo.yml"
+      - "VERSION"
+      - "peak_flow.yml"
+      - ".github/**"
+      - "!docs/**"
+      - "!spec/docs/**"
     script:
       - bundle exec rspec
   build_2:
     environment:
       RUBY_VERSION: 3.2.2
     name: Ruby 3.2.2
+    paths:
+      - "lib/**"
+      - "spec/**"
+      - "*.rb"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "Rakefile"
+      - "html_gen.gemspec"
+      - ".ruby-version"
+      - ".rubocop.yml"
+      - ".rubocop_todo.yml"
+      - "VERSION"
+      - "peak_flow.yml"
+      - ".github/**"
+      - "!docs/**"
+      - "!spec/docs/**"
     script:
       - bundle exec rspec
   build_3:
     name: Linters
+    paths:
+      - "lib/**"
+      - "spec/**"
+      - "*.rb"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "Rakefile"
+      - "html_gen.gemspec"
+      - ".ruby-version"
+      - ".rubocop.yml"
+      - ".rubocop_todo.yml"
+      - "VERSION"
+      - "peak_flow.yml"
+      - ".github/**"
+      - "!docs/**"
+      - "!spec/docs/**"
     script:
       - bundle exec rake best_practice_project:run
